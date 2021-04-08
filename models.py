@@ -24,6 +24,9 @@ class Pet(models.Model) :
 
     contacts = models.ManyToManyField(settings.AUTH_USER_MODEL,
         through='Contact', related_name='contacts_owned')
+
+    locations = models.ManyToManyField(settings.AUTH_USER_MODEL,
+        through='Location', related_name='locations_owned')
     # Picture
     picture = models.BinaryField(null=True, editable=True)
     content_type = models.CharField(max_length=256, null=True, help_text='The MIMEType of the file')
@@ -79,9 +82,6 @@ class Location(models.Model):
     zipcode = models.TextField()
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Fav(models.Model) :
